@@ -1,0 +1,39 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<title>Property detail</title>
+</h:head>
+<h:body>
+	<h:form>
+	<h1>Property Detail</h1>
+		<h:graphicImage url="#{resource['images:Duke.wave.shadow.gif']}"
+			alt="Duke waving his hand" />
+		<p:messages id="messages" showDetail="false" autoUpdate="true" />
+
+		<h:panelGrid id="grid" columns="3" cellpadding="5">
+			<p:outputLabel for="property" value="Property:" />
+			<p:inputText id="property" required="true"
+				value="#{propertyDetailModel.property}" />
+			<p:message for="property" />
+
+			<p:outputLabel for="value" value="Value:" />
+			<p:inputText id="value" required="true"
+				value="#{propertyDetailModel.value}" />
+			<p:message for="value" />
+
+		</h:panelGrid>
+
+		<p:commandButton id="back" value="Back" immediate="true"
+			action="propertyoverview.xhtml" ajax="false" />
+		<p:commandButton id="get" value="Fetch" update="grid"
+			actionListener="#{propertyDetailControl.fetch}" ajax="false" />
+		<p:commandButton id="save" value="Save" update="grid"
+			actionListener="#{propertyDetailControl.save}" ajax="false" />
+		<p:commandButton id="delete" value="Delete" update="grid"
+			actionListener="#{propertyDetailControl.delete}" ajax="false" />
+	</h:form>
+</h:body>
+</html>

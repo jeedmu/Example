@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+<h:head></h:head>
+<body>
+	<h:form>
+	<h1>Property Overview</h1>
+		<p:messages id="messages" showDetail="false" autoUpdate="true" />
+
+		<h:panelGrid id="grid" columns="4" cellpadding="5">
+			<p:outputLabel for="search" value="Searchstring:" />
+			<p:inputText id="search"
+				value="#{propertyOverviewModel.searchString}" />
+			<p:message for="search" />
+			<p:commandButton id="searchbutton" value="Search"
+				actionListener="#{propertyOverviewControl.search}" ajax="false" />
+		</h:panelGrid>
+
+		<p:dataTable id="table" var="property"
+			 selectionMode="single" selection="#{propertyOverviewModel.selectedProperty}"
+			rowKey="#{property.property}" value="#{propertyOverviewModel.list}">
+<!-- 			<p:column selectionMode="single" style="width:16px;text-align:center" /> -->
+			<p:column headerText="Property">
+				<h:outputText value="#{property.property}" />
+			</p:column>
+			<p:column headerText="Value">
+				<h:outputText value="#{property.value}" />
+			</p:column>
+			<f:facet name="footer">
+				<p:commandButton process="table" 
+					value="View" action="#{propertyOverviewControl.view}" ajax="false" />
+				<p:commandButton process="table" 
+					value="Create new" action="#{propertyOverviewControl.create}" ajax="false" />
+			</f:facet>
+			<p:ajax event="rowSelect" />
+		</p:dataTable>
+
+	</h:form>
+</body>
+</html>
